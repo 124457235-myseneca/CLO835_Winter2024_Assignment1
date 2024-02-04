@@ -35,11 +35,17 @@ jobs:
       run: |
         cd appnode/
         # Docker build command
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG_APP -f Dockerfile .
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG_DB -f Dockerfile_mysql .
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG_APP -f Dockerfile .
         
         # Unit test
-        docker run -d -p 80:8080 --name nodeapp $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG_APP
+        docker network create --driver=bridge --subnet=192.168.0.0/24 --gateway=192.168.0.1 assignment-1
+        export DBHOST=192.168.0.2
+        export DBPORT=3306
+        export DBUSER=root
+        export DBPWD=pw
+        docker run --net assignment-1 --name my_db -d -e MYSQL_ROOT_PASSWORD=pw $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG_DB
+        docker run --net assignment-1  -d -p 80:8080 --name blue $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG_APP
         docker ps
         echo "Pause for 10 seconds to let container start"
         sleep 10
