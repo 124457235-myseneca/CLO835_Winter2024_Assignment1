@@ -45,11 +45,11 @@ jobs:
         export DBUSER=root
         export DBPWD=pw
         docker run --net assignment-1 --name my_db -d -e MYSQL_ROOT_PASSWORD=pw $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG_DB
-        docker run --net assignment-1  -d -p 80:8080 --name blue $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG_APP
+        docker run --net assignment-1  -d -p 8081:8080 --name blue $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG_APP -e DBHOST=$DBHOST -e DBPORT=$DBPORT -e  DBUSER=$DBUSER -e DBPWD=$DBPWD my_app
         docker ps
         echo "Pause for 10 seconds to let container start"
         sleep 10
-        curl localhost -vvv
+        curl localhost:8081 -vvv
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG_APP
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG_DB
         
