@@ -50,7 +50,7 @@ jobs:
         docker ps
         echo "Pause for 10 seconds to let container start"
         sleep 10
-        curl 192.168.0.3:8081 -vvv
+        curl 192.168.0.3:8080 -vvv
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG_APP
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG_DB
         
