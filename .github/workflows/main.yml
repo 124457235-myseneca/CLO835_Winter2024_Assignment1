@@ -40,17 +40,18 @@ jobs:
         
         # Unit test
         #docker network create --driver=bridge --subnet=192.168.0.0/24 --gateway=192.168.0.1 assignment-1
-        docker network create --driver=bridge --subnet=192.168.0.0/24 --gateway=192.168.0.1 assignment-1
-        export DBHOST=192.168.0.2
+        #docker network create --driver=bridge --subnet=192.168.0.0/24 --gateway=192.168.0.1 assignment-1
+        #export DBHOST=192.168.0.2
         export DBPORT=3306
         export DBUSER=root
         export DBPWD=pw
-        docker run --net assignment-1 --name my_db -d -e MYSQL_ROOT_PASSWORD=pw $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG_DB
-        docker run --net assignment-1  -d -p 8081:8080 --name blue -e DBHOST=$DBHOST -e DBPORT=$DBPORT -e  DBUSER=$DBUSER -e DBPWD=$DBPWD $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG_APP 
+        #docker run --net assignment-1 --name my_db -d -e MYSQL_ROOT_PASSWORD=pw $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG_DB
+        #docker run --net assignment-1  -d -p 8081:8080 --name blue -e DBHOST=$DBHOST -e DBPORT=$DBPORT -e  DBUSER=$DBUSER -e DBPWD=$DBPWD $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG_APP
+        docker run -d -p 8081:8080 --name blue -e DBHOST=$DBHOST -e DBPORT=$DBPORT -e  DBUSER=$DBUSER -e DBPWD=$DBPWD $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG_APP 
         docker ps
         echo "Pause for 10 seconds to let container start"
         sleep 10
-        curl 192.168.0.3:8080 -vvv
+        curl localhost:8081 -vvv
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG_APP
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG_DB
         
