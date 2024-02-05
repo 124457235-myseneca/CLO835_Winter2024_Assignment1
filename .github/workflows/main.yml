@@ -39,7 +39,7 @@ jobs:
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG_APP -f Dockerfile .
         
         # Unit test
-        #docker network create --driver=bridge --subnet=192.168.0.0/24 --gateway=192.168.0.1 assignment-1
+        ##docker network create --driver=bridge --subnet=192.168.0.0/24 --gateway=192.168.0.1 assignment-1
         #docker network create --driver=bridge --subnet=192.168.0.0/24 --gateway=192.168.0.1 assignment-1
         #export DBHOST=192.168.0.2
         #export DBPORT=3306
