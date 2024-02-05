@@ -30,7 +30,7 @@ jobs:
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: ecr_assignment1
-        IMAGE_TAG_APP: APP_v0.1
+        IMAGE_TAG_APP: APP_v0.2
         IMAGE_TAG_DB: DB_v0.1
       run: |
         cd appnode/
