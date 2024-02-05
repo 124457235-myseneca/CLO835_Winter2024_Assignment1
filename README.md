@@ -1,11 +1,11 @@
 # CLO 835 Assignment1
 
-##Student Name: Kasun Athugoda
-##Studnet ID: 124457235
+## Student Name: Kasun Athugoda
+## Studnet ID: 124457235
 
 ---
 
-###1. Deploying the AWS infrastructure for the docker environment.
+### 1. Deploying the AWS infrastructure for the docker environment.
 ```bash
 cd terraform
 ssh-keygen -t rsa -f clo835app
@@ -18,7 +18,7 @@ terraform apply --auto-approve
 `terraform destroy --auto -approve`
 
 
-###2. Git hub Actions
+### 2. Git hub Actions
 
  -   i. Update the authentication tokens in github to run github actions.
  -  ii. Merge a new branch with `prod` branch to execute the github action DEPLOY ECR.
