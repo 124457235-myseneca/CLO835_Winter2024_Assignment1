@@ -16,3 +16,6 @@ terraform apply --auto-approve
 
 *To destroy the terrafrom environment*
 `terraform destroy --auto -approve`
+
+
+###2. Git hub Actions
