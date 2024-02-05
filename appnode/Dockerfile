@@ -1,4 +1,4 @@
-FROM ubuntu:21.04
+FROM ubuntu
 RUN apt-get update -y
 COPY . /app
 WORKDIR /app
